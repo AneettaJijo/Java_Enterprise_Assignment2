@@ -1,0 +1,106 @@
+package com.example.library;
+
+
+import jakarta.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table
+public class Member {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int  membId;
+
+    @Column
+    private String name;
+    @Column
+    private String address;
+    @Column
+    private String membType;
+    @Column
+    private Date membDate;
+    @Column
+    private String expiryDate;
+    
+    public Member() {
+		super();
+		
+	}
+    
+    public Member(int membId, String name, String address, String membType, Date membDate, String expiryDate,
+			List<Book> books) {
+		super();
+		this.membId = membId;
+		this.name = name;
+		this.address = address;
+		this.membType = membType;
+		this.membDate = membDate;
+		this.expiryDate = expiryDate;
+		this.books = books;
+	}
+
+	
+
+    public int getMembId() {
+		return membId;
+	}
+
+	public void setMembId(int membId) {
+		this.membId = membId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getMembType() {
+		return membType;
+	}
+
+	public void setMembType(String membType) {
+		this.membType = membType;
+	}
+
+	public Date getMembDate() {
+		return membDate;
+	}
+
+	public void setMembDate(Date membDate) {
+		this.membDate = membDate;
+	}
+
+	public String getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(String expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	
+
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Book> books;
+}
